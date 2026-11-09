@@ -1,11 +1,11 @@
-
 import Tab from "./Tab";
+import "./App.css";
 function App() {
   return (
-    <> 
-        <h1 >آموزش برنامه نویسی با بوتواستارت</h1>
-        <p>تمرین هفته سیزدهم</p>
-  <Tab/>
+    <>
+      <div>
+        <Tab />
+      </div>
     </>
   );
 }

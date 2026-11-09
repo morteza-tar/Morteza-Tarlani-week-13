@@ -1,48 +1,51 @@
-// src/App.js
-import React, { useState } from "react";
-import "./App.css";
-
+import { useState } from "react";
 function Tab() {
-  const initialTab = () => {
-    const savedTab = localStorage.getItem("activeTab");
-    return savedTab ? parseInt(savedTab) : 0;
-  };
-
-  const [activeTab, setActiveTab] = useState(initialTab);
-
+  const [activeTab, setActiveTab] = useState(1);
   const tabs = [
-    { title: "صفحه اصلی", content: "آموزش برنامه نویسی با بوتواستارت" },
-    {
-      title: "بوت کمپ فرانت اند",
-      content:
-        "  بوت کمپ فرانت اندراهی به سوی آینده ای بهتر از مبتدی تا حرفه‌ای، کد بزن، یاد بگیر و آینده‌ات را بساز!",
-    },
-    { title: "خدمات", content: "خدمات ارائه شده توسط بوت کمپ فرانت اند" },
-    { title: "تماس با ما", content: "راه‌های ارتباطی با بوت کمپ فرانت اند" },
+    { id: 1, title: "TAB 1", content: "Content 1" },
+    { id: 2, title: "TAB 2", content: "Content 2" },
+    { id: 3, title: "TAB 3", content: "Content 3" },
+    { id: 4, title: "TAB 4", content: "Content 4" },
   ];
 
-  const handleTabClick = (index) => {
-    setActiveTab(index);
-    localStorage.setItem("activeTab", index.toString());
-  };
-
   return (
-    <div className="app">
+    <div className="container">
       <div className="tabs">
-        {tabs.map((tab, index) => (
+        {tabs.map((tab) => (
           <button
-            key={index}
-            className={`tab ${activeTab === index ? "active" : ""}`}
-            onClick={() => handleTabClick(index)}
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={activeTab === tab.id ? "active" : ""}
           >
             {tab.title}
           </button>
         ))}
       </div>
-
-      <div className="tab-content">
-        <h3>{tabs[activeTab].title}</h3>
-        <p>{tabs[activeTab].content}</p>
+      <div className="content">
+        {tabs.map((tab) =>
+          activeTab === tab.id ? (
+            <div key={tab.id}>
+              <h2>{tab.content}</h2>
+            </div>
+          ) : null,
+        )}
+      </div>
+      <div className="project-info">
+        <h3>React Tabs – Week 13 Bootcamp</h3>
+        <p>
+          این پروژه به‌عنوان تمرین هفته سیزدهم بوت‌کمپ، با راهنمایی استاد{" "}
+          <strong>میلاد عظمی</strong>
+          طراحی و پیاده‌سازی شده است.
+        </p>
+        <p>
+          هدف این تمرین، یادگیری مفاهیم React، مدیریت State، کار با Eventها و
+          پیاده‌سازی کامپوننت‌های تعاملی است.
+        </p>
+        <div className="info-details">
+          <span>Instructor: Milad Azami</span>
+          <span>Bootcamp: Week 13</span>
+          <span>Technology: React</span>
+        </div>
       </div>
     </div>
   );
